@@ -1,4 +1,4 @@
-package Practice;
+package trees;
 public class BinaryTreeInsert {  
     public static void main(String[] args)   
     {  
