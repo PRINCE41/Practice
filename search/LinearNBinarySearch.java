@@ -1,3 +1,5 @@
+package search;
+
 public class LinearNBinarySearch {
 
     public static void main(String[] args) {
