@@ -1,5 +1,6 @@
 package sorting;
 
+//ATC:O(nlogn)
 public class MergeSort {
 
     public static void main(String[] args) {
@@ -28,7 +29,8 @@ public class MergeSort {
     private static void mergeSort(int[] arr, int left, int right){
 
         if(left < right) {
-            int mid = (left+right)/2;
+            //int mid = (left+right)/2; // Integer limit may exceeds
+            int mid = left + (right-left)/2;
             
             System.out.print((++count1) + " Going to call 1Break-mergeSort:");
             print(arr, left, mid);
@@ -59,14 +61,16 @@ public class MergeSort {
         int[] leftArr = new int[n1];
         int[] rightArr = new int[n2];
 
-
+        // Breakdown into arrays: STARTED
         for(int x=0; x<n1; x++){
             leftArr[x] = arr[left+x];
         }
-
         for(int x=0; x<n2; x++){
             rightArr[x] = arr[mid+1 + x];
         }
+        // Breakdown into arrays: ENDED
+
+
         System.out.print("Left-Array-Status:");
         print(leftArr);
         System.out.println("|n1:" + n1);
@@ -78,6 +82,7 @@ public class MergeSort {
         int j = 0;
         int k = left;
 
+        // Insertion to original array: STARTED
         while(i<n1 && j<n2){
             if(leftArr[i] <= rightArr[j]){
                 arr[k] = leftArr[i];
@@ -88,7 +93,6 @@ public class MergeSort {
             }
             k++;
         }
-
         while(i<n1){
             arr[k] = leftArr[i];
             i++;
@@ -99,6 +103,8 @@ public class MergeSort {
             j++;
             k++;
         }
+        // Insertion to original array: ENDED
+
         System.out.print("Updated-Sorted-Array:");
         print(arr);
         System.out.println();
