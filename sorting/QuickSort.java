@@ -1,6 +1,6 @@
 package sorting;
 
-
+// ATC:O(nlogn)
 public class QuickSort {
 
     public static void main(String[] args) {
