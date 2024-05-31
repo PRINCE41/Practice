@@ -65,6 +65,62 @@ public class LinkedListAdv {
         
     }
 
+    // Slow-Fast(turtle-hare) approach
+    public Node findMid(Node head){
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next; // 1 2 3
+            fast = fast.next.next; // 1 3 5
+        }
+        return slow;
+    }
+
+    public boolean checkPalindrome(){
+        if(head == null || head.next == null) {
+            return true;
+        }
+        Node mid = findMid(head);
+
+        Node prev = null;
+        Node currNode = mid;
+        Node next;
+        while (currNode != null) {
+            next = currNode.next;
+            currNode.next = prev;
+            prev = currNode;
+            currNode = next;
+        }
+
+        Node right = prev; // head of other half
+        Node left = head;
+
+        while(right != null){
+            if(left.data != right.data){
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+        }
+        return true;
+    }
+
+    // Floyd's CFA
+    // 1 2 3 4 5 - 1 2 3 4 5
+    public boolean isCycle(){
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                return true; // cycle exists
+            }
+        }
+
+        return false;
+    }
+
     public static void main(String[] args) {
         LinkedListAdv linkedList = new LinkedListAdv();
 
@@ -73,9 +129,9 @@ public class LinkedListAdv {
         linkedList.print();
         linkedList.addFirst(2);
         linkedList.print();
-        linkedList.addLast(3);
+        linkedList.addLast(1);
         linkedList.print();
-        linkedList.addLast(4);
+        linkedList.addLast(2);
         linkedList.print();
         linkedList.add(2, 9);
         linkedList.print();
@@ -84,6 +140,15 @@ public class LinkedListAdv {
 
         System.out.println("head:" + head.data + " tail:" + tail.data);
 
+        //System.out.println(linkedList.checkPalindrome());
+
+
+
+        head = new Node(1);
+        head.next = new Node(2);
+        head.next.next = new Node(3);
+        //head.next.next.next = head;
+        System.out.println(linkedList.isCycle());
     
         
     }
