@@ -106,7 +106,7 @@ public class LinkedListAdv {
     }
 
     // Floyd's CFA
-    // 1 2 3 4 5 - 1 2 3 4 5
+    // 1 2 3 4 5 6 - 1 2 3 4 5 6
     public boolean isCycle(){
         Node slow = head;
         Node fast = head;
@@ -117,8 +117,34 @@ public class LinkedListAdv {
                 return true; // cycle exists
             }
         }
-
         return false;
+    }
+
+    public void removeCycle(){
+        Node slow = head;
+        Node fast = head;
+        boolean isCycle= false;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                isCycle = true;
+                break;
+            }
+        }
+        if(!isCycle){
+            return;
+        }
+
+        // finding meeting point 
+        slow = head;
+        Node prev = null; // last node for which next to be assigned as null later
+        while(slow != fast){
+            slow = slow.next;
+            prev = fast;
+            fast = fast.next;
+        }
+        prev.next = null;
     }
 
     public static void main(String[] args) {
@@ -145,9 +171,12 @@ public class LinkedListAdv {
 
 
         head = new Node(1);
-        head.next = new Node(2);
+        Node temp = new Node(2);
+        head.next = temp;
         head.next.next = new Node(3);
-        //head.next.next.next = head;
+        head.next.next.next = temp;
+        System.out.println(linkedList.isCycle());
+        linkedList.removeCycle();
         System.out.println(linkedList.isCycle());
     
         
