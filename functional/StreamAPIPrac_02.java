@@ -3,6 +3,7 @@ package functional;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+
 import java.util.function.Function;
 
 public class StreamAPIPrac_02 {
@@ -15,10 +16,62 @@ public class StreamAPIPrac_02 {
         // 1- Find occurrences of each single-digit given as string of nos separated by space
         // findOccurrences(str);
 
-        // 1- Find highest occurred single-digit from given string of nos separated by space
-        findHighestOccurredDigit(str);
+        // 2- Find highest occurred single-digit from given string of nos separated by space
+        // findHighestOccurredDigit(str);
+
+        // 3- Find sum using reduce
+        // findSum(str);
+
+        // 4- Generic
+        generic(str);
 
     }
+
+    // find largest palidromatic Substr
+    // 
+
+
+
+
+
+
+    private static void generic(String str) {
+
+        List<Character> l = str.chars().mapToObj(c -> (char) c)
+            .collect(Collectors.toList());
+
+
+        Collections.reverse(l);
+
+      
+        
+
+
+        System.out.println(l);
+        // int[] intArray = Arrays.stream(str.split(" "))
+        // .mapToInt(Integer::parseInt)
+        // .toArray();
+
+        // List<Integer> list = Arrays.stream(str.split(" ")).map(Integer::parseInt)
+        //     .collect(Collectors.toList());
+
+
+        // OptionalInt sum = Arrays.stream(intArray).reduce(Integer::sum);
+        //sum.ifPresent(System.out::println); // Output: 15
+
+    }
+
+
+    private static void findSum(String str) {
+        OptionalInt sum = Arrays.stream(str.split(" "))
+        .mapToInt(Integer:: parseInt)
+        .reduce(Integer::sum);
+        sum.ifPresent(System.out::println); // Output: 15
+
+    }
+
+
+
 
     private static void findHighestOccurredDigit(String str){
         Entry<Character, Long> mapEntry = str
@@ -34,11 +87,13 @@ public class StreamAPIPrac_02 {
         System.out.println(mapEntry.getKey() + ":" + mapEntry.getValue());
     }
 
+    
+
     private static void findOccurrences(String str){
         Map<Character, Long> map = str
             .chars()
             .mapToObj(c -> (char) c)
-            .collect(Collectors.groupingBy(Function.identity(), HashMap::new, Collectors.counting()));
+            .collect(Collectors.groupingBy(x -> x, HashMap::new, Collectors.counting()));
             
         map.forEach((k,v) -> {
             System.out.println(k + ":" + v);

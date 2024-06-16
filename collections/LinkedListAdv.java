@@ -147,6 +147,64 @@ public class LinkedListAdv {
         prev.next = null;
     }
 
+
+    // O(nlogn)
+    public Node mergeSort(Node head){
+
+        if(head == null || head.next == null) return head;
+        // findMid
+        Node mid = getMid(head);
+        // left & right MS
+        Node rightHead = mid.next;
+        mid.next = null;
+        Node newLeft = mergeSort(head);
+        Node newRight = mergeSort(rightHead);
+        return merge(newLeft, newRight);
+    }
+
+    private Node merge(Node newLeft, Node newRight) {
+        Node mergedLL = new Node(-1);
+        Node temp = mergedLL;
+
+        while(newLeft != null && newRight != null){
+            if(newLeft.data <= newRight.data){
+                temp.next = newLeft;
+                newLeft = newLeft.next;
+                temp = temp.next;
+            } else {
+                temp.next = newRight;
+                newRight = newRight.next;
+                temp = temp.next;
+            }
+        }
+
+        while(newLeft != null){
+            temp.next = newLeft;
+            newLeft = newLeft.next;
+            temp = temp.next;
+        }
+        while(newRight != null){
+            temp.next = newRight;
+            newRight = newRight.next;
+            temp = temp.next;
+        }
+
+        tail = temp;
+
+        return mergedLL.next;
+
+    }
+
+    private Node getMid(Node head) {
+        Node slow = head;
+        Node fast = head.next;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow; //mid-node
+    }
+
     public static void main(String[] args) {
         LinkedListAdv linkedList = new LinkedListAdv();
 
@@ -166,18 +224,24 @@ public class LinkedListAdv {
 
         System.out.println("head:" + head.data + " tail:" + tail.data);
 
+        head = linkedList.mergeSort(head);
+        linkedList.print();
+        System.out.println("head:" + head.data + " tail:" + tail.data);
+
+
+
+
+
         //System.out.println(linkedList.checkPalindrome());
 
-
-
-        head = new Node(1);
-        Node temp = new Node(2);
-        head.next = temp;
-        head.next.next = new Node(3);
-        head.next.next.next = temp;
-        System.out.println(linkedList.isCycle());
-        linkedList.removeCycle();
-        System.out.println(linkedList.isCycle());
+        // head = new Node(1);
+        // Node temp = new Node(2);
+        // head.next = temp;
+        // head.next.next = new Node(3);
+        // head.next.next.next = temp;
+        // System.out.println(linkedList.isCycle());
+        // linkedList.removeCycle();
+        // System.out.println(linkedList.isCycle());
     
         
     }
