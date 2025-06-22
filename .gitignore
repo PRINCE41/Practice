@@ -1,0 +1,73 @@
+# === IDEs and Editors ===
+.vscode/
+.classpath
+.project
+.settings/
+.idea/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Java build files ===
+bin/
+out/
+build/
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# === Node (if using JavaScript/Node) ===
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+dist/
+
+# === Python (just in case) ===
+_pycache_/
+*.pyc
+
+# === Logs ===
+*.log
+logs/
+.log.
+
+# === Environment/config ===
+.env
+.env.*
+*.local
+
+# === Git files ===
+*.orig
+*.rej
+*.patch
+
+# === Backup/Archive ===
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bak
+
+# === Others ===
+*.iml
+*.ipr
+*.iws
+*.db
+*.sqlite
+*.sqlite3
+*.pdf
+
+# === JetBrains Rider / IntelliJ cache ===
+.idea/
+*.sln
+*.user
+*.suo
